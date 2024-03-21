@@ -1,10 +1,10 @@
 import { View, Text, SafeAreaView, StyleSheet} from "react-native"
 import { Link } from "expo-router"
+import { AuthenticationForm } from "../components/AuthenticationForm"
 export default function Home () {
     return (
         <SafeAreaView style={styles.container}>
-            <Text>Home</Text>
-            <Link href="/profile">Go to Profile</Link>
+            <AuthenticationForm title="Register for an account" action="Sign up"/>
         </SafeAreaView>
     )
 }
@@ -12,6 +12,7 @@ export default function Home () {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "lightblue"
-    }
+        backgroundColor: "lightblue",
+        justifyContent: "center",
+    },
 })
