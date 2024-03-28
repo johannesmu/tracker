@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     button: {
         marginHorizontal: 20,
         marginVertical: 20,
+        alignItems: "center",
     },
     buttonText: {
         textAlign: "center",

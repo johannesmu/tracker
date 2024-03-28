@@ -6,7 +6,7 @@ import { AlternateAuthBtn } from "../components/AlternateAuthBtn"
 export default function Login () {
     return (
         <SafeAreaView style={styles.container}>
-            <AuthenticationForm title="Login to your account" action="Sign in"/>
+            <AuthenticationForm title="Login to your account" action="Sign in" validation={ false } />
             <AlternateAuthBtn text="Don't have an account?" link="/" linkText="sign up here"/>
         </SafeAreaView>
     )
