@@ -1,12 +1,12 @@
 import { View, Text, SafeAreaView, StyleSheet} from "react-native"
 import { Link } from "expo-router"
 import { AuthenticationForm } from "../components/AuthenticationForm"
-export default function Home () {
+export default function Login () {
     return (
         <SafeAreaView style={styles.container}>
-            <AuthenticationForm title="Register for an account" action="Sign up"/>
+            <AuthenticationForm title="Sign in to your account" action="Sign in"/>
             <View>
-                <Text>Already have an account? <Link href="/login">Click here</Link></Text>
+                <Text>Don't have an account? <Link href="/">Click here</Link></Text>
             </View>
         </SafeAreaView>
     )

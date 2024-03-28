@@ -1,5 +1,6 @@
 import { View, Text, TextInput, StyleSheet, Pressable } from "react-native"
 import { useState, useEffect } from "react"
+import { Theme } from "../theme/Theme"
 
 export function AuthenticationForm ( props ) {
     const [ email, setEmail ] = useState('')
@@ -41,7 +42,10 @@ export function AuthenticationForm ( props ) {
                 onChangeText={ (text) => setPassword(text) }
                 style={ (validPassword) ? styles.validInput : styles.input } 
             />
-            <Pressable style={ styles.button }>
+            <Pressable 
+                style={ (validEmail && validPassword) ? styles.button : styles.buttonDisabled }
+                disabled={ (validEmail && validPassword ) ? false : true  }
+            >
                 <Text style={ styles.buttonText }>{ props.action }</Text>
             </Pressable>
         </View>
@@ -50,7 +54,7 @@ export function AuthenticationForm ( props ) {
 
 const styles = StyleSheet.create({
     form: {
-        backgroundColor: "white",
+        backgroundColor: Theme.tertiary,
         marginHorizontal: 20,
         padding: 20,
         borderRadius: 10,
@@ -70,7 +74,12 @@ const styles = StyleSheet.create({
     },
     button: {
         marginTop: 30,
-        backgroundColor: "darkblue",
+        backgroundColor: Theme.dark,
+        padding: 10,
+    },
+    buttonDisabled: {
+        marginTop: 30,
+        backgroundColor: Theme.light,
         padding: 10,
     },
     buttonText: {
