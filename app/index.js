@@ -1,7 +1,7 @@
 import { View, Text, SafeAreaView, StyleSheet} from "react-native"
 import { Link } from "expo-router"
 import { SafeAreaProvider } from "react-native-safe-area-context"
-import { Theme } from "../components/Theme"
+import { Theme } from "../theme/Theme"
 import { AuthenticationForm } from "../components/AuthenticationForm"
 import { AlternateAuthBtn } from "../components/AlternateAuthBtn"
 

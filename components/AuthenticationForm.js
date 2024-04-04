@@ -1,6 +1,6 @@
 import { View, Text, TextInput, StyleSheet, Pressable } from "react-native"
 import { useState, useEffect } from "react"
-import { Theme } from "../components/Theme"
+import { Theme } from "../theme/Theme"
 
 export function AuthenticationForm ( props ) {
     const [ email, setEmail ] = useState('')
