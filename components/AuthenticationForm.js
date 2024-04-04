@@ -26,6 +26,10 @@ export function AuthenticationForm ( props ) {
         }
     }, [password])
 
+    const actionHandler = () => {
+        props.handler( email, password )
+    }
+
     return (
         <View style={ styles.form }>
             <Text style={ styles.title }>{ props.title }</Text>
@@ -45,6 +49,7 @@ export function AuthenticationForm ( props ) {
             <Pressable 
                 style={ (validEmail && validPassword) ? styles.button : styles.buttonDisabled }
                 disabled={ (validEmail && validPassword ) ? false : true  }
+                onPress={() => actionHandler() }
             >
                 <Text style={ styles.buttonText }>{ props.action }</Text>
             </Pressable>
