@@ -6,6 +6,7 @@ import { AlternateAuth } from "../components/AlternateAuth"
 import { Theme } from "../theme/Theme"
 import { AuthContext } from "../contexts/AuthContext"
 import { createUserWithEmailAndPassword } from "@firebase/auth"
+import { router } from "expo-router"
 
 export default function Register ( props ) {
     const auth = useContext( AuthContext )
@@ -14,6 +15,7 @@ export default function Register ( props ) {
         createUserWithEmailAndPassword(auth,email,password)
             .then( (userCredential) => {
                 console.log( userCredential.user )
+                router.push('/home')
             })
             .catch( (error) => {
                 console.log( error.code, error.message )
