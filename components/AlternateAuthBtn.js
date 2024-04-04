@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from "react-native";
 export function AlternateAuthBtn( props ) {
     return (
         <View style={styles.button}>
-            <Text>{ props.text } <Link href={ props.link }>{ props.linkText }</Link></Text>
+            <Text>{ props.text } <Link replace href={ props.link }>{ props.linkText }</Link></Text>
         </View>
     )
 }

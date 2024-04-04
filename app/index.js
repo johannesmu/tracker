@@ -1,15 +1,16 @@
 import { View, Text, SafeAreaView, StyleSheet} from "react-native"
 import { Link } from "expo-router"
+import { SafeAreaProvider } from "react-native-safe-area-context"
 import { Theme } from "../components/Theme"
 import { AuthenticationForm } from "../components/AuthenticationForm"
 import { AlternateAuthBtn } from "../components/AlternateAuthBtn"
 
 export default function Home () {
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <AuthenticationForm title="Register for an account" action="Sign up" validation={true} />
             <AlternateAuthBtn text="Already have an account?" link="/login" linkText="sign in here"/>
-        </SafeAreaView>
+        </View>
     )
 }
 
