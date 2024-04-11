@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet} from "react-native"
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 
 import { AuthenticationForm } from "../components/AuthenticationForm"
 import { AlternateAuth } from "../components/AlternateAuth"
@@ -7,15 +7,21 @@ import { Theme } from "../theme/Theme"
 import { AuthContext } from "../contexts/AuthContext"
 import { createUserWithEmailAndPassword } from "@firebase/auth"
 import { router } from "expo-router"
+import { onAuthStateChanged } from "firebase/auth"
 
 export default function Register ( props ) {
     const auth = useContext( AuthContext )
     
+    onAuthStateChanged( auth, (user) => {
+        if( user ) {
+            router.replace('/home')
+        }
+    } )
+
     const createAccount = ( email, password ) => {
         createUserWithEmailAndPassword(auth,email,password)
             .then( (userCredential) => {
-                console.log( userCredential.user )
-                router.push('/home')
+                router.replace('/home')
             })
             .catch( (error) => {
                 console.log( error.code, error.message )

@@ -12,7 +12,6 @@ export default function Login () {
     const SignIn = ( email, password ) => {
        signInWithEmailAndPassword(auth,email,password)
             .then( (userCredential) => {
-                console.log( userCredential.user )
                 router.replace('/home')
             })
             .catch( (error) => {
@@ -24,9 +23,9 @@ export default function Login () {
         <SafeAreaView style={styles.container}>
             <AuthenticationForm title="Sign in to your account" action="Sign in" handler={SignIn}/>
             <AlternateAuth 
-            text="Don't have an account?" 
-            route="/"
-            linkText="Sign up here"
+                text="Don't have an account?" 
+                route="/"
+                linkText="Sign up here"
             />
         </SafeAreaView>
     )
