@@ -6,11 +6,12 @@ import { AlternateAuth } from "../components/AlternateAuth"
 import { Theme } from "../theme/Theme"
 import { AuthContext } from "../contexts/AuthContext"
 import { createUserWithEmailAndPassword } from "@firebase/auth"
-import { router } from "expo-router"
+import { router, useRouter } from "expo-router"
 import { onAuthStateChanged } from "firebase/auth"
 
 export default function Register ( props ) {
     const auth = useContext( AuthContext )
+    const router = useRouter()
     
     onAuthStateChanged( auth, (user) => {
         if( user ) {
