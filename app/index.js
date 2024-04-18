@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet} from "react-native"
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 
 import { AuthenticationForm } from "../components/AuthenticationForm"
 import { AlternateAuth } from "../components/AlternateAuth"
@@ -10,6 +10,7 @@ import { router, useRouter } from "expo-router"
 import { onAuthStateChanged } from "firebase/auth"
 
 export default function Register ( props ) {
+    const[ authState, setAuthState ] = useState( false )
     const auth = useContext( AuthContext )
     const router = useRouter()
     
