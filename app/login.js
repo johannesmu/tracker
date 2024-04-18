@@ -20,7 +20,7 @@ export default function Login () {
     }
 
     useEffect( () => {
-        if( auth.currentUser.uid ) {
+        if( auth.currentUser ) {
             router.replace('/home')
         }
     })

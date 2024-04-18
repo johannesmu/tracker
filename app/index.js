@@ -15,9 +15,10 @@ export default function Register ( props ) {
     const router = useRouter()
     
     useEffect( () => {
-        if( auth.currentUser.uid ) {
+        if( auth.currentUser ) {
             router.replace('/home')
         }
+        
     })
 
     const createAccount = ( email, password ) => {
