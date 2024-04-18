@@ -1,21 +1,51 @@
-import { View, Text, SafeAreaView, StyleSheet} from "react-native"
-import { Link } from "expo-router"
-import { SafeAreaProvider } from "react-native-safe-area-context"
-import { Theme } from "../theme/Theme"
-import { AuthenticationForm } from "../components/AuthenticationForm"
-import { AlternateAuthBtn } from "../components/AlternateAuthBtn"
+import { SafeAreaView, StyleSheet} from "react-native"
+import { useContext, useEffect, useState } from "react"
 
-export default function Home () {
+import { AuthenticationForm } from "../components/AuthenticationForm"
+import { AlternateAuth } from "../components/AlternateAuth"
+import { Theme } from "../theme/Theme"
+import { AuthContext } from "../contexts/AuthContext"
+import { createUserWithEmailAndPassword } from "@firebase/auth"
+import { router, useRouter } from "expo-router"
+import { onAuthStateChanged } from "firebase/auth"
+
+export default function Register ( props ) {
+    const[ authState, setAuthState ] = useState( false )
+    const auth = useContext( AuthContext )
+    const router = useRouter()
+    
+    useEffect( () => {
+        if( auth.currentUser ) {
+            router.replace('/home')
+        }
+        
+    })
+
+    const createAccount = ( email, password ) => {
+        createUserWithEmailAndPassword(auth,email,password)
+            .then( (userCredential) => {
+                router.replace('/home')
+            })
+            .catch( (error) => {
+                console.log( error.code, error.message )
+            })
+    }
+
     return (
-        <View style={styles.container}>
-            <AuthenticationForm title="Register for an account" action="Sign up" validation={true} />
-            <AlternateAuthBtn text="Already have an account?" link="/login" linkText="sign in here"/>
-        </View>
+        <SafeAreaView style={styles.container}>
+            <AuthenticationForm title="Register for an account" action="Sign up" handler={createAccount} />
+            <AlternateAuth 
+            text="Already have an account?"
+            route="/login" 
+            linkText="Login" 
+            />
+        </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
+        flexDirection: "column",
         flex: 1,
         backgroundColor: Theme.primaryLight,
         justifyContent: "center",

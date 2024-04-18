@@ -9,52 +9,47 @@ export function AuthenticationForm ( props ) {
     const [ validPassword, setValidPassword ] = useState(false)
 
     useEffect( () => {
-       
-        // validate email, if valid, change validEmail to true
-        // find the @ symbol
-        let atIndex = email.indexOf('@')
-        // find the . symbol
-        let dotIndex = email.indexOf('.')
-       
-        if( atIndex > 0 == 1 && dotIndex > 0 ) {
+        if( email.indexOf('@') > 0 && email.indexOf('.') > 0 ) {
             setValidEmail( true )
         }
         else {
             setValidEmail( false )
         }
-    }, [email] )
+    }, [ email ])
 
     useEffect( () => {
-        
         if( password.length >= 8 ) {
             setValidPassword( true )
         }
         else {
             setValidPassword( false )
         }
-    }, [password] )
-    
+    }, [password])
+
+    const actionHandler = () => {
+        props.handler( email, password )
+    }
+
     return (
         <View style={ styles.form }>
             <Text style={ styles.title }>{ props.title }</Text>
-            <Text style={ styles.label }>Email</Text>
-            {/* email */}
+            <Text>Email</Text>
             <TextInput 
-                style={ ( validEmail) ? styles.validInput : styles.input } 
+                style={ (validEmail) ? styles.validInput : styles.input } 
                 value={ email }
-                onChangeText={ (content) => setEmail( content ) }
+                onChangeText={ (text) => setEmail(text) }
             />
-            <Text style={ styles.label }>Password</Text>
-            {/* password */}
+            <Text>Password</Text>
             <TextInput 
-                style={ ( validPassword ) ? styles.validInput : styles.input } 
                 secureTextEntry={true} 
                 value={ password }
-                onChangeText={ (content) => setPassword( content ) }
+                onChangeText={ (text) => setPassword(text) }
+                style={ (validPassword) ? styles.validInput : styles.input } 
             />
             <Pressable 
-                style={ (validEmail && validPassword) ? styles.button :styles.buttonDisabled }
-                disabled={ (validEmail && validPassword ) ? false : true }
+                style={ (validEmail && validPassword) ? styles.button : styles.buttonDisabled }
+                disabled={ (validEmail && validPassword ) ? false : true  }
+                onPress={() => actionHandler() }
             >
                 <Text style={ styles.buttonText }>{ props.action }</Text>
             </Pressable>
@@ -77,30 +72,26 @@ const styles = StyleSheet.create({
     },
     input: {
         borderBottomColor: "#666666",
-        borderBottomWidth: 1,
+        borderBottomWidth: 2,
         padding: 5,
-        marginTop: 2,
     },
     validInput: {
-        borderBottomColor: "green",
-        borderBottomWidth: 1,
+        borderBottomColor: "#0ac43c",
+        borderBottomWidth: 2,
         padding: 5,
-        marginTop: 2,
     },
     button: {
         marginTop: 30,
-        backgroundColor: Theme.secondaryDark,
-        padding: 12,
-        borderRadius: 10,
+        backgroundColor: Theme.primaryDark,
+        padding: 10,
     },
     buttonDisabled: {
         marginTop: 30,
-        backgroundColor: Theme.secondary,
-        padding: 12,
-        borderRadius: 10,
+        backgroundColor: Theme.primary,
+        padding: 10,
     },
     buttonText: {
-        color: "white",
+        color: Theme.primaryLight,
         textAlign: "center",
     }
 })

@@ -1,8 +1,8 @@
-export const Config = {
-    apiKey: "AIzaSyA3y5_si2VMTnMcfHTVJrvu4VbJVYoxy34",
-    authDomain: "expo23-d75c7.firebaseapp.com",
-    projectId: "expo23-d75c7",
-    storageBucket: "expo23-d75c7.appspot.com",
-    messagingSenderId: "800808212364",
-    appId: "1:800808212364:web:7839f0c6d9e7a4de50a8a9"
+export const firebaseConfig = {
+    apiKey: "AIzaSyDKYAPD6KaW2lJw3gTaLU0qV4Flif8d2g8",
+    authDomain: "expo24-cf78d.firebaseapp.com",
+    projectId: "expo24-cf78d",
+    storageBucket: "expo24-cf78d.appspot.com",
+    messagingSenderId: "152789493379",
+    appId: "1:152789493379:web:cff85e0700ac5feada5db6"
 }
