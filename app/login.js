@@ -1,10 +1,10 @@
 import { SafeAreaView, StyleSheet} from "react-native"
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { AuthenticationForm } from "../components/AuthenticationForm"
 import { AlternateAuth } from "../components/AlternateAuth"
 import { Theme } from "../theme/Theme"
 import { AuthContext } from "../contexts/AuthContext"
-import { signInWithEmailAndPassword } from "@firebase/auth"
+import { signInWithEmailAndPassword, onAuthStateChanged } from "@firebase/auth"
 import { router } from "expo-router"
 
 export default function Login () {
@@ -18,6 +18,12 @@ export default function Login () {
                 console.log( error.code, error.message )
             })
     }
+
+    useEffect( () => {
+        if( auth.currentUser.uid ) {
+            router.replace('/home')
+        }
+    })
 
     return (
         <SafeAreaView style={styles.container}>

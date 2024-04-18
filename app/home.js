@@ -4,7 +4,11 @@ import { Theme } from "../theme/Theme"
 import { Stack } from "expo-router"
 import { DBContext } from "../contexts/DBContext"
 import { AuthContext } from "../contexts/AuthContext"
+import { StorageContext } from "../contexts/StorageContext"
 import { collection, addDoc, query, getDocs } from "firebase/firestore"
+import { ref } from "firebase/storage"
+import { ListItem } from "../components/ListItem"
+import { router } from "expo-router"
 
 export default function Home( props ) {
     const [ started, setStarted ] = useState( false )
@@ -12,10 +16,12 @@ export default function Home( props ) {
     const [ stopTime, setStopTime ] = useState()
     const [ taskName, setTaskName] = useState()
     const [ listData, setListData ] = useState([])
+    const [ loaded, setLoaded ] = useState( false )
 
     const auth = useContext( AuthContext )
     const userId = auth.currentUser.uid
     const db = useContext( DBContext )
+    const storage = useContext( StorageContext )
 
     const getTime = () => {
         return new Date().getTime()
@@ -36,6 +42,8 @@ export default function Home( props ) {
         const task = { start: startTime, stop: stopTime, name: taskName }
         const dbcollection = collection( db, `usertasks/${userId}/tasks`)
         const docRef = await addDoc( dbcollection, task )
+        setTaskName('')
+        setLoaded( false )
     }
 
     const readData = async () => {
@@ -50,9 +58,16 @@ export default function Home( props ) {
         setListData( data )
     }
 
+    const showDetail = ( itemId ) => {
+        router.navigate({ pathname: `/detail/${itemId}`, params: { id: itemId } })
+    }
+
     useEffect( () => {
-        readData()
-    }, [started])
+        if( loaded == false ) {
+            readData()
+            setLoaded( true )
+        }
+    }, [loaded, listData ])
 
     return (
         <View style={ styles.container }>
@@ -69,7 +84,7 @@ export default function Home( props ) {
             </View>
             <FlatList 
                 data={ listData }
-                renderItem={ ({item}) => ( <Text>{ item.name }</Text>) }
+                renderItem={ ({item}) => ( <ListItem name={item.name} id={item.id} handler={showDetail} />) }
                 keyExtractor={(item) => item.id }
             />
         </View>

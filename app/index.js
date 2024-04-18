@@ -13,11 +13,11 @@ export default function Register ( props ) {
     const auth = useContext( AuthContext )
     const router = useRouter()
     
-    onAuthStateChanged( auth, (user) => {
-        if( user ) {
+    useEffect( () => {
+        if( auth.currentUser.uid ) {
             router.replace('/home')
         }
-    } )
+    })
 
     const createAccount = ( email, password ) => {
         createUserWithEmailAndPassword(auth,email,password)
